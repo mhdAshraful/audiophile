@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { createContext, useCallback, useState, useEffect, useMemo, useReducer } from "react";
+import React, { createContext, useCallback, useState, useMemo, useReducer } from "react";
 
 
 
@@ -31,17 +31,17 @@ const reducer = (state, action) => {
       switch (action.type) {
             case "GET_EARPHONE": {
                   let earphones = action.payload.filter((item) => item.category === "earphones")
-                  console.log("reduced to earphones:", earphones);
+                  // console.log("reduced to earphones:", earphones);
                   return { ...state, earphones }
             }
             case "GET_HEADPHONE": {
                   let headphones = action.payload.filter((item) => item.category === "headphones");
-                  console.log("reduced to headphones:", headphones);
+                  // console.log("reduced to headphones:", headphones);
                   return { ...state, headphones };
             }
             case "GET_SPEAKER": {
                   let speakers = action.payload.filter((item) => item.category === "speakers");
-                  console.log("reduced to speakers:", speakers);
+                  // console.log("reduced to speakers:", speakers);
                   return { ...state, speakers };
             }
 
@@ -49,7 +49,7 @@ const reducer = (state, action) => {
                   let item = action.payload
                   // adding item into card array
                   let cart = [...state.cart, item]
-                  console.log("cart value will be", cart);
+                  // console.log("cart value will be", cart);
                   return { ...state, cart };
             }
             case "CART_INC":
@@ -122,7 +122,7 @@ export const DataProvider = ({ children }) => {
             axios.get(url).then(
                   (response) => {
                         setAllData(response.data)
-                        console.log("allData:::", response.data);
+                        // console.log("allData:::", response.data);
                         dispatch({ type: "LOADING", payload: false })
                         getearphone(response.data)
                         getheadphone(response.data)
@@ -147,7 +147,7 @@ export const DataProvider = ({ children }) => {
             }), [state.earphones, state.headphones, state.speakers, state.loading, state.item_total, state.quantity, state.grand_total, state.cart,]
       )
 
-      console.log("stored val", stored);
+      // console.log("stored val", stored);
       return (
             <DataContext.Provider value={[stored, increase, decrease, addtocart, remove, clearcart]}>
                   {children}

@@ -17,7 +17,7 @@ function App() {
     let { state, loading } = AppData();
     let [showcart, setShowcart] = useState(false)
     let { cart } = state;
-    console.log("appjs LOADING value", loading);
+    // console.log("appjs LOADING value", loading);
 
 
 
@@ -36,7 +36,7 @@ function App() {
     return (
 
 
-        loading === true ? <h2> DataLoading </h2> :
+        loading === true ? <Load /> :
             <div>
                 <ScrollToTop />
                 <NavBar width={width} setShowcart={setShowcart} />
@@ -59,13 +59,26 @@ function App() {
                         <Route path="checkout" element={<Checkout />} />
                     </Routes>
 
-
-                    {/* <Outlet /> */}
-
                 </div>
             </div>
 
     );
+}
+
+function Load({ children }) {
+    return (
+        <div>
+            <h1
+                style={{
+                    position: 'absolute',
+                    top: "50%",
+                    left: "50%",
+                    transform: "translateX( -50%)",
+                    transition: "all 1s easeIn"
+                }}>🌀 Loading...</h1>
+            {children}
+        </div>
+    )
 }
 
 export default memo(App);
