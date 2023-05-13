@@ -56,7 +56,7 @@ const Cart = ({ setShowcart }) => {
           }
           <div className='cart_grp_three  grp_item_total'>
             <p className='uppercase'>total</p>
-            <p className='currency'>{currecny(grand_total)}</p>
+            <p className='currency'>{currecny(grand_total.toFixed(3))}</p>
           </div>
           <Buttons className="btn_checkout" name={"Checkout"} button_type={"filled_btn"} where={"/checkout"} onClick={() => setShowcart(false)} />
         </div>
