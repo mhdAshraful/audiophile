@@ -1,3 +1,5 @@
 {
-      "audioCues.notebookCellCompleted": "auto"
+	"accessibility.signals.notebookCellCompleted": {
+		"sound": "auto"
+	}
 }

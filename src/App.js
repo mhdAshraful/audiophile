@@ -11,16 +11,11 @@ import ScrollToTop from "./Components/Utils/ScrollToTop";
 import Cart from "./Components/Utils/Cart";
 import Checkout from "./Components/Pages/Checkout";
 
-
 function App() {
-
     let { state, loading } = AppData();
     let [showcart, setShowcart] = useState(false)
     let { cart } = state;
     // console.log("appjs LOADING value", loading);
-
-
-
     // console.log("app data context============> cart", cart);
     let [width, setWidth] = useState(window.innerWidth);
 
