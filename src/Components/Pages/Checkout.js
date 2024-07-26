@@ -50,7 +50,6 @@ const Checkout = () => {
 		"https://audio-server-amber.vercel.app/api/orderDetails/"
 	);
 	// const url = new URL("http://10.0.0.6:5555/api/orderDetails");
-	let result = undefined;
 
 	const sendOrder = () => {
 		axios
@@ -61,11 +60,9 @@ const Checkout = () => {
 				},
 			})
 			.then((res) => {
-				console.log("status", res.status);
+				// console.log("status", res.status);
 
 				if (res.status === 200) {
-					result = res.data;
-					// console.log("-------------------------", result);
 					setTimeout(() => {
 						setThanks(true);
 						// navigate("/")
@@ -73,8 +70,7 @@ const Checkout = () => {
 				}
 			})
 			.catch((e) => {
-				result = { "axios errors": e };
-				console.log("axios errors:", e);
+				console.log("axios errors", e);
 			});
 	};
 
