@@ -2,15 +2,14 @@ import { AppData } from "../../Contexts/DataContext";
 import ImageLoader from "../ImageLoader";
 import Buttons from "../Buttons";
 import React from "react";
+
 export const TopBanner = () => {
 	let { state, loading } = AppData();
 	let { data } = state;
-	console.log("state________________", data);
 
 	let product = data.filter((item) =>
 		item.slug === "xx99-mark-two-headphones" ? item : null
 	)[0];
-	console.log("prod---------------->", product);
 
 	const image = {
 		mobile: "../assets/home/mobile/image-header.jpg",

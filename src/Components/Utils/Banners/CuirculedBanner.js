@@ -9,9 +9,8 @@ export const CuirculedBanner = () => {
       let { state, loading } = AppData();
       let { data } = state
 
-
       let product = data.filter((item) => item.slug === "zx9-speaker" ? item : null)[0]
-      console.log(product);
+      
 
 
       return (
