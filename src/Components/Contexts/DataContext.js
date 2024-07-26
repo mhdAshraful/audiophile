@@ -20,7 +20,6 @@ export const ContextWrapper = ({ children }) => {
 		earphones: [],
 		headphones: [],
 		speakers: [],
-		loading: false,
 		cart: [],
 		total_quantity: 0,
 		grand_total: 0,
@@ -189,12 +188,6 @@ export const ContextWrapper = ({ children }) => {
 
 			// return { ...state, grand_total, quantity };
 
-			case "LOADING": {
-				let loading = action.payload;
-				console.log("loading", loading);
-				return { ...state, loading: loading };
-			}
-
 			default:
 				throw new Error(`${action.type} is not allowed!!`);
 		}
@@ -250,29 +243,22 @@ export const ContextWrapper = ({ children }) => {
      */
 	const getData = () => {
 		console.log("data called from DB");
-		dispatch({ type: "LOADING", payload: true });
 		setLoading(true);
 		axios
 			.get(url)
 			.then((response) => {
-				console.log("allData:::", response.data);
-
-				dispatch({ type: "SETDATA", payload: response.data });
-				dispatch({ type: "FIND_CATEGORY", payload: response.data });
 				if (response.status === 200) {
 					console.log("----------------------", response.status);
-					dispatch({ type: "LOADING", payload: false });
+					console.log("response from DB", response.data);
+					dispatch({ type: "SETDATA", payload: response.data });
+					dispatch({ type: "FIND_CATEGORY", payload: response.data });
+					setLoading(false);
 				}
-				setLoading(false);
 			})
 			.catch((e) => {
 				console.log("axiosError::", e);
 			});
 	};
-
-	useEffect(() => {
-		getData();
-	}, []);
 
 	/* 
       ┌────────────────────────────────────────────────────────────────────────────┐
@@ -282,7 +268,6 @@ export const ContextWrapper = ({ children }) => {
       │                                                                            │
       └────────────────────────────────────────────────────────────────────────────┘
      */
-
 	let locSt = localStorage.getItem("A_E_W_S");
 	let [state, dispatch] = useReducer(reducer, initialState, () => {
 		if (locSt) {
@@ -296,9 +281,11 @@ export const ContextWrapper = ({ children }) => {
 		} else {
 			return initialState;
 		}
-
-		// return locSt ? JSON.parse(locSt) : initialState
 	});
+
+	useEffect(() => {
+		getData();
+	}, []);
 
 	useEffect(() => {
 		dispatch({ type: "GRAND_TOTAL", payload: state.cart });
@@ -312,12 +299,12 @@ export const ContextWrapper = ({ children }) => {
 		<AppContext.Provider
 			value={{
 				state,
+				loading,
 				addtocart,
 				increase,
 				decrease,
 				remove,
 				clearcart,
-				loading,
 			}}
 		>
 			{children}
