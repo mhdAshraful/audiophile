@@ -2,109 +2,28 @@ import React, { useEffect } from "react";
 import { AppData } from "../Contexts/DataContext";
 import Buttons from "../Utils/Buttons";
 import Footer from "../Utils/Footer";
-import { OrderData } from "../Contexts/OrderContext";
 import { currecny } from "../Utils/Currecny";
 import { useState } from "react";
-import axios from "axios";
 
 const Checkout = () => {
 	const { state, clearcart, dispatch } = AppData();
 	const { grand_total } = state;
 	const [thanks, setThanks] = useState(false);
-
-	// checkout
-	let {
-		options,
-		handlePaymentOptions,
-		orderState,
-		setName,
-		setEmail,
-		setPhone,
-		setAddress,
-		setPostCode,
-		setCity,
-		setCountry,
-		setENUMB,
-		setEPIN,
-	} = OrderData();
-
-	const {
-		userName,
-		userEmail,
-		userPhone,
-		userAddress,
-		userPostCode,
-		userCity,
-		userCountry,
-		paymentMethod,
-		e_Number,
-		e_Pin,
-	} = orderState;
-
+	const [paymentMethod, setPayM] = useState("");
 	const invoiceAmount = grand_total + 50 + grand_total * 0.2;
-	// Combining user and item information
-	const orderInformation = { ...state.cart, ...orderState, invoiceAmount };
+
+	const orderInformation = { ...state.cart, invoiceAmount };
 	const [errors, setFormErrors] = useState({});
 
 	const postOrder = async (e) => {
 		e.preventDefault();
-		const url = "https://audio-server-kappa.vercel.app/api/orderinfo";
 		console.log("before sending", orderInformation);
-		// const errors = validateOrderDetails(orderState);
-		const payload = orderInformation;
 
-		// if (Object.keys(errors).length === 0) {
-		try {
-			const res = await axios
-				.post(url, payload, {
-					headers: {
-						"Content-Type": "application/json",
-						Accept: "application/json",
-						"X-Requested-With": "XMLHttpRequest",
-					},
-					withCredentials: true,
-				})
-				.then(
-					setTimeout(() => {
-						clearcart();
-						setThanks(true);
-						setFormErrors({});
-						// navigate("/");
-					}, 1500)
-				);
-			console.log("response", res.data);
-		} catch (error) {
-			console.error("validation ❌ Errors:", errors);
-		}
-		// } else {
-		// 	console.log("❌ Errors:", errors);
-		// 	setFormErrors(errors);
-		// }
-	};
-
-	const validateOrderDetails = (state) => {
-		let errors = {};
-
-		if (!state.userName.trim()) errors.userName = "Name is required";
-		if (!state.userEmail.trim()) {
-			errors.userEmail = "Email is required";
-		} else if (!/\S+@\S+\.\S+/.test(state.userEmail)) {
-			errors.userEmail = "Invalid email format";
-		}
-		if (!state.userPhone.trim()) errors.userPhone = "Phone is required";
-		if (!state.userAddress.trim()) errors.userAddress = "Address is required";
-		if (!state.userPostCode.trim())
-			errors.userPostCode = "Post Code is required";
-		if (!state.userCity.trim()) errors.userCity = "City is required";
-		if (!state.userCountry.trim()) errors.userCountry = "Country is required";
-
-		if (state.paymentMethod === "e-money") {
-			if (!state.e_Number.trim())
-				errors.e_Number = "e-Money number is required";
-			if (!state.e_Pin.trim()) errors.e_Pin = "e-Money PIN is required";
-		}
-
-		return errors;
+		setTimeout(() => {
+			setThanks(true);
+			// clearcart();
+			setFormErrors({});
+		}, 2600);
 	};
 
 	/* 
@@ -152,16 +71,7 @@ const Checkout = () => {
 									{" "}
 									Name{" "}
 								</label>
-								<input
-									type="text"
-									value={userName}
-									onChange={setName}
-									placeholder="Alexi Ward"
-									required
-								/>
-								{errors?.userName && (
-									<p style={{ color: "red" }}>{errors.userName}</p>
-								)}
+								<input type="text" placeholder="Alexi Ward" required />
 							</div>
 							<div className="input_field">
 								<label className="input_label" htmlFor="email">
@@ -170,14 +80,9 @@ const Checkout = () => {
 								</label>
 								<input
 									type="email"
-									value={userEmail}
-									onChange={setEmail}
 									placeholder="alexi@email.com"
 									required
 								/>
-								{errors?.userEmail && (
-									<p style={{ color: "red" }}>{errors.userEmail}</p>
-								)}
 							</div>
 							<div className="input_field">
 								<label className="input_label" htmlFor="phone">
@@ -186,14 +91,9 @@ const Checkout = () => {
 								</label>
 								<input
 									type="tel"
-									value={userPhone}
-									onChange={setPhone}
 									placeholder="+1 6100 4343 456"
 									required
 								/>
-								{errors?.userPhone && (
-									<p style={{ color: "red" }}>{errors.userPhone}</p>
-								)}
 							</div>
 						</div>
 						<p className="sub_title">Shipping Info</p>
@@ -205,75 +105,41 @@ const Checkout = () => {
 								</label>
 								<input
 									type="text"
-									value={userAddress}
-									onChange={setAddress}
 									placeholder="1111 Willims Avenue"
 									required
 								/>
-								{errors?.userAddress && (
-									<p style={{ color: "red" }}>{errors.userAddress}</p>
-								)}
 							</div>
 							<div className="input_field">
 								<label className="input_label" htmlFor="Zip code">
 									{" "}
 									Zip code{" "}
 								</label>
-								<input
-									type="text"
-									value={userPostCode}
-									onChange={setPostCode}
-									placeholder="0000 NY"
-									required
-								/>
-								{errors?.userPostCode && (
-									<p style={{ color: "red" }}>{errors.userPostCode}</p>
-								)}
+								<input type="text" placeholder="0000 NY" required />
 							</div>
 							<div className="input_field">
 								<label className="input_label" htmlFor="City">
 									{" "}
 									City{" "}
 								</label>
-								<input
-									type="text"
-									value={userCity}
-									onChange={setCity}
-									placeholder="New York"
-									required
-								/>
-								{errors?.userCity && (
-									<p style={{ color: "red" }}>{errors.userCity}</p>
-								)}
+								<input type="text" placeholder="New York" required />
 							</div>
 							<div className="input_field">
 								<label className="input_label" htmlFor="Country">
 									{" "}
 									Country{" "}
 								</label>
-								<input
-									type="text"
-									value={userCountry}
-									onChange={setCountry}
-									placeholder="America"
-									required
-								/>
-								{errors?.userCountry && (
-									<p style={{ color: "red" }}>{errors.userCountry}</p>
-								)}
+								<input type="text" placeholder="America" required />
 							</div>
 						</div>
 						<p className="sub_title">Payment Details</p>
 						<div className="payment">
-							{options.map((option, index) => {
+							{["e-money", "cash on delivery"].map((option, index) => {
 								return (
 									<div key={index} className="radio_field">
 										<input
 											type="radio"
 											id={option}
 											name="payment Method"
-											value={option}
-											onChange={handlePaymentOptions}
 											required
 										/>
 										<label className="input_label" htmlFor={option}>
@@ -294,8 +160,6 @@ const Checkout = () => {
 										</label>
 										<input
 											type="text"
-											value={e_Number}
-											onChange={setENUMB}
 											placeholder="e.g 1 2 3 4 5 6"
 											required
 										/>
@@ -308,13 +172,7 @@ const Checkout = () => {
 											{" "}
 											e-Money Pin{" "}
 										</label>
-										<input
-											type="text"
-											value={e_Pin}
-											onChange={setEPIN}
-											placeholder="0000"
-											required
-										/>
+										<input type="text" placeholder="0000" required />
 									</div>
 								</div>
 							) : (
