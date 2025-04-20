@@ -1,0 +1,51 @@
+.best_gears_container {
+    margin: auto;
+    padding: 1.6rem;
+    text-align: center;
+
+    p {
+        color: var(--black-L);
+    }
+
+    @for $i from 1 through 3 {
+        :nth-child(#{$i}) {
+            margin: 16px 0px;
+        }
+    }
+
+    @include MINI_MOBILE {
+        width: 100%;
+    }
+
+    @include TABLET {
+        padding: 2.66rem;
+
+        .info {
+            margin: 5.93rem;
+        }
+    }
+
+    @include DESKTOP {
+        padding: 8rem 15%;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        align-items: center;
+
+        .info {
+            width: 29.7rem;
+            margin-right: 2rem;
+            text-align: left;
+
+        }
+
+        .image {
+            width: 36rem;
+            margin-left: 8.33rem;
+
+            img {
+                width: 100%;
+            }
+        }
+    }
+}

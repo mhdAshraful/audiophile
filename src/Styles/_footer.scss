@@ -1,0 +1,137 @@
+.footer_container {
+    width: 100%;
+    height: auto;
+    padding: 24px;
+    background-color: var(--black-D);
+    color: var(--white-L);
+    // text-align: center;
+    display: flex;
+    // alwats column
+    flex-direction: column;
+
+
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s;
+
+
+    &::before {
+        content: "";
+        background-color: var(--orange-D);
+        width: 100px;
+        height: 4px;
+        position: relative;
+        transform: translate3d(0px, -24px, 0px);
+
+        @include TABLET {
+            transform: translate3d(0px, -4rem, 0px);
+        }
+
+        @include DESKTOP {
+            transform: translate3d(0px, -5rem, 0px);
+        }
+
+    }
+
+    .footer_links {
+        display: flex;
+        // always column
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .footer_buttons {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+
+            @include TABLET {
+                flex-direction: row;
+                justify-content: flex-start;
+
+
+                a {
+                    margin: 0 2.26rem 0 0;
+                }
+
+            }
+
+            @include DESKTOP {
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+
+                a {
+                    margin: 0 2.26rem 0 0;
+                }
+            }
+        }
+
+
+
+        @include MOBILE {
+            align-items: center;
+        }
+
+        @include TABLET {
+            align-items: flex-start;
+        }
+
+        @include DESKTOP {
+            align-items: flex-start;
+        }
+    }
+
+
+    .footer_details_bottoms {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        p {
+            margin: 1.6rem 0;
+        }
+
+        .icon_each {
+            width: 24px;
+            height: 24px;
+            margin: 48px 16px;
+        }
+
+        svg:hover {
+            fill: var(--orange-D);
+        }
+
+        @include DESKTOP {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+        }
+
+
+    }
+
+    @include TABLET {
+
+        align-items: flex-start;
+        padding: 4rem 2.6rem;
+    }
+
+
+    @include DESKTOP {
+        align-items: flex-start;
+        padding: 5rem 11rem;
+
+        .comm_width {
+            width: 36rem;
+        }
+    }
+
+
+}

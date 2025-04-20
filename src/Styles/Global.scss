@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;700&display=swap');
+@import "mixins.scss";
+@import "sizes.scss";
+@import "nav.scss";
+@import "top_banner";
+@import "productCollection";
+@import "productDetails";
+@import "cart.scss";
+@import "checkout_form.scss";
+@import "catagory_thumb.scss";
+@import "bestgear.scss";
+@import "footer.scss";
+
+:root {
+    --orange-D: hsla(22, 85%, 57%, 1);
+    --orange-L: hsla(21, 94%, 70%, 1);
+    --black-D: hsla(0, 0%, 10%, 1);
+    --black-L: hsla(0, 0%, 30%, .5);
+    --white-D: hsla(0, 0%, 80%, 1);
+    --white-L: hsla(0, 0%, 95%, 1);
+    --white: hsla(0, 0%, 100%, 1);
+
+
+
+
+    font-size: 15px;
+    line-height: 25px;
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Manrope, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    transition: font-size 0.3s;
+}
+
+html {
+
+    h1 {
+        @include H1;
+    }
+
+    h2 {
+        @include H2;
+    }
+
+    h3 {
+        @include H3;
+    }
+
+    h4 {
+        @include H4;
+    }
+
+    h5 {
+        @include H5;
+    }
+
+    h6 {
+        @include H6;
+    }
+
+    p {
+        @include P;
+    }
+
+    .over_line {
+        @include Overline;
+    }
+
+    .sub_title {
+        @include SubTitle;
+    }
+
+    .color_secondary {
+        color: var(--orange-D);
+    }
+}
+
+.App {
+    transform: translateY(0);
+    margin: auto;
+
+}
+
+a {
+    all: unset;
+    text-decoration: none;
+}
+
+button {
+
+    width: 160px;
+    height: 48px;
+    font-size: 1rem;
+    text-transform: uppercase;
+
+    background-color: inherit;
+
+    &.bordered_btn {
+        background-color: inherit;
+        color: var(--black-D);
+        border: 1px solid var(--black-D);
+
+        &:hover {
+            background-color: var(--black-D);
+            color: var(--white);
+        }
+    }
+
+    &.borderless_btn {
+
+        color: var(--black-L);
+        border: 0;
+
+        &:hover {
+            color: var(--orange-D);
+        }
+    }
+
+    &.filled_btn {
+        background-color: var(--orange-D);
+        color: var(--white);
+        border: 0;
+
+        &:hover {
+            background-color: var(--orange-L);
+            color: var(--white);
+        }
+    }
+
+    &.nav_btn {
+        width: auto;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        background-color: var(--black-D);
+        color: var(--white);
+        text-transform: uppercase;
+        border: 0;
+
+        &:hover {
+            color: var(--orange-L);
+        }
+    }
+
+    &.reg_btn {
+        font-size: 12px;
+        font-weight: 400;
+        background-color: inherit;
+        text-transform: capitalize;
+        color: var(--black-L);
+        border: 0;
+
+        &:hover {
+            color: var(--orange-L);
+        }
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.logo {
+    svg {
+        transition: all 0.3s ease-in-out;
+        fill: var(--white);
+    }
+
+    // this is corrent way to do
+    // svg:hover{
+    //     cursor: pointer;
+    //     fill: var(--orange-D);
+    // }
+}
+
+.loadedImage {
+    border: 0;
+    border-radius: 8px;
+}

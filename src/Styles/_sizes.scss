@@ -1,0 +1,40 @@
+$breakpoints:("xs": 0, "mobile": '375px', "tablet": '767px', "desktop": '1200px');
+
+
+@mixin MINI_MOBILE {
+      @media only screen and (min-width: map-get($breakpoints, "xs")) and (max-width:map-get($breakpoints, "mobile")) {
+            @content;
+      }
+
+}
+
+
+
+@mixin MOBILE {
+      @media only screen and (min-width: map-get($breakpoints, "mobile")) and (max-width:map-get($breakpoints, "tablet")) {
+            @content;
+      }
+
+}
+
+@mixin TABLET {
+      @media only screen and (min-width: map-get($breakpoints, "tablet")) and (max-width:map-get($breakpoints, "desktop")) {
+            @content;
+      }
+
+}
+
+@mixin DESKTOP {
+      @media only screen and (min-width: map-get($breakpoints, "desktop")) {
+            @content;
+      }
+
+}
+
+// geneirc
+
+@mixin breakpoint($bp:0) {
+      @media (min-width:$bp) {
+            @content;
+      }
+}
